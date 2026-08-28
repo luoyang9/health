@@ -1,665 +1,108 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>First HealthKit week</title>
-  
-<style data-hatch-notebook-brief-css="true">
-/*
-Hatch goal briefing letter stylesheet.
-
-This is the canonical base stylesheet for Figma-aligned Hatch Letter goal briefs.
-The brief finalizer inlines this file into the final HTML artifact, so
-brief authors should not paste, copy, link, rewrite, minify, or summarize this
-stylesheet in individual briefs.
-
-Use this as the shared base for goal briefs. Brief-specific CSS may add
-content-only treatments, but should not redefine the root Hatch Letter tokens or
-replace the core sheet, article, masthead, figure, and content-detail styles
-below.
-
-------------------------------------------------------------------------------
-HATCH LETTER LAYER
-A full-page warm paper letter matching the Figma "v0 Letter Tweaks" direction:
-centered small date, large orange handwritten title, compact editorial body,
-and rounded white-framed images.
-------------------------------------------------------------------------------
-*/
-
-@import url("https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Caveat:wght@400;500;600;700&family=Oooh+Baby&family=Tenor+Sans&display=swap");
-
-:root {
-  --paper: #f1e7da;
-  --paper-card: #ffffff;
-  --card: #fff9f4;
-  --ink: #23221f;
-  --ink-soft: #6f6555;
-  --ink-faint: rgba(35, 34, 31, 0.48);
-  --accent: #a13f04;
-  --accent-deep: #7a3303;
-  --accent-2: #6f6555;
-  --highlight: #ffe3c0;
-  --highlight-2: #efd0c0;
-  --line: #e3d6c1;
-
-  --body: 1.1875rem;       /* Figma body: 19px */
-  --lead: clamp(1.5rem, 2.25vw, 1.6875rem); /* Figma lead: 24px mobile, 27px web */
-  --lead-leading: clamp(2rem, 3.333vw, 2.5rem); /* Figma lead: 32px mobile, 40px web */
-  --h1: clamp(4rem, 8vw, 6rem); /* Figma title range: 64px mobile, 96px web */
-  --h2: clamp(2.125rem, 5vw, 2.375rem); /* Figma heading: 34px mobile, 38px web */
-  --h3: clamp(1.25rem, 3.2vw, 1.35rem);
-  --caption: 1.25rem;      /* Figma caption: 20px */
-  --signature: 2.375rem;   /* Figma bottom signature: 38px */
-  --signature-leading: 1.210526; /* Figma bottom signature: 46px */
-  --list: clamp(1.0625rem, 1.667vw, 1.25rem); /* Figma list: 17px mobile, 20px web */
-  --list-leading: clamp(1.9125rem, 3.333vw, 2.5rem); /* Figma list: 30.6px mobile, 40px web */
-  --measure: 680px;        /* Figma text column */
-  --media-width: 760px;    /* Figma image frame */
-  --page-gutter: 16px;     /* Figma mobile side padding / minimum gutter */
-  --leading: 1.5;          /* 19px / 28.5px */
-
-  --radius: 16px;
-  --card-radius: 32px;
-  --image-radius: 30px;
-  --gap: 1.75rem;          /* Figma web column gap: 28px */
-  --mobile-gap: 1.5rem;    /* Figma mobile column gap: 24px */
-  --raised:
-    0 2px 2px rgba(111, 101, 85, 0.1),
-    0 8px 24px rgba(111, 101, 85, 0.1);
-
-  --c1: var(--accent);
-  --c2: #d6a56d;
-  --c3: #d8b7a6;
-  --c4: #8c8f77;
-  --c5: #6f6555;
-  --grid: var(--line);
-  --axis: var(--ink-faint);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  background: var(--paper);
-}
-
-body {
-  margin: 0;
-  background-color: var(--paper);
-  color: var(--ink);
-  font-family: "Alegreya", Georgia, serif;
-  font-size: var(--body);
-  line-height: var(--leading);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-body:has(.sheet) {
-  background-color: var(--paper);
-  padding: 0;
-}
-
-.sheet {
-  box-sizing: border-box;
-  position: relative;
-  margin: 0;
-  max-width: none;
-  min-height: 100vh;
-  width: 100%;
-  background-color: var(--paper);
-}
-
-.sheet::after {
-  content: none;
-}
-
-.article {
-  margin: 0 auto;
-  max-width: var(--measure);
-  padding: 110px 0 110px;
-  width: calc(100% - var(--page-gutter) - var(--page-gutter));
-}
-
-:where(.article) p {
-  margin: 0 0 var(--gap);
-}
-
-.article > p + p {
-  text-indent: 0;
-}
-
-.dateline {
-  color: var(--ink);
-  font-family: "Alegreya", Georgia, serif;
-  font-size: 1.25rem;
-  font-style: italic;
-  line-height: 0.7;
-  margin: 0 0 1.5rem;
-  text-align: center;
-  transform: none;
-}
-
-.title {
-  color: var(--accent);
-  font-family: "Caveat", cursive;
-  font-size: var(--h1);
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 0.95;
-  margin: 0 auto 1.75rem;
-  max-width: var(--measure);
-  overflow-wrap: break-word;
-  text-align: center;
-}
-
-.wave-rule {
-  display: none;
-}
-
-.byline {
-  color: var(--accent);
-  font-family: "Oooh Baby", "Caveat", cursive;
-  font-size: var(--signature);
-  line-height: var(--signature-leading);
-  margin: 1.4rem 0 1.8rem;
-  text-align: left;
-  transform: none;
-}
-
-.lead {
-  color: var(--ink);
-  font-size: var(--lead);
-  font-weight: 600;
-  line-height: var(--lead-leading);
-}
-
-.lead::first-letter {
-  color: inherit;
-  float: none;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  padding: 0;
-}
-
-.article h2 {
-  color: var(--ink);
-  font-family: "Tenor Sans", Georgia, serif;
-  font-size: var(--h2);
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.21;
-  margin: 1.8rem 0 0.8rem;
-}
-
-.article h2::before {
-  content: none;
-}
-
-.article h3,
-.chart__title {
-  color: var(--ink);
-  font-family: "Tenor Sans", Georgia, serif;
-  font-size: var(--h3);
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.25;
-  margin: 1.9rem 0 0.6rem;
-}
-
-.article a {
-  background-image: linear-gradient(var(--accent), var(--accent));
-  background-position: 0 1.05em;
-  background-repeat: repeat-x;
-  background-size: 6px 2px;
-  color: var(--accent-deep);
-  padding-bottom: 0.04em;
-  text-decoration: none;
-  transition:
-    color 0.2s,
-    background-size 0.2s;
-}
-
-.article a:hover {
-  background-size: 6px 3px;
-  color: var(--accent);
-}
-
-mark,
-.hl {
-  background: linear-gradient(
-    104deg,
-    transparent 0.5%,
-    var(--highlight) 0.5%,
-    var(--highlight) 96%,
-    transparent 96%
-  );
-  border-radius: 1px;
-  box-decoration-break: clone;
-  color: inherit;
-  margin: 0 -0.05em;
-  padding: 0.05em 0.15em;
-  -webkit-box-decoration-break: clone;
-}
-
-.hl--mint {
-  background-image: linear-gradient(
-    104deg,
-    transparent 0.5%,
-    var(--highlight-2) 0.5%,
-    var(--highlight-2) 96%,
-    transparent 96%
-  );
-}
-
-/* Hand-made layer (added): angle variants so no two swipes look identical. */
-.hl--a {
-  background-image: linear-gradient(
-    99deg,
-    transparent 1%,
-    var(--highlight) 1%,
-    var(--highlight) 94%,
-    transparent 97%
-  );
-}
-
-.hl--b {
-  background-image: linear-gradient(
-    108deg,
-    transparent 0%,
-    var(--highlight-2) 2%,
-    var(--highlight-2) 97%,
-    transparent 99%
-  );
-}
-
-/* Hand-made layer (added): a hand-drawn underline drawn behind a phrase.
-   Wrap the phrase in <span class="scribble">…<svg>…</svg></span>; the inline
-   SVG path carries filter="url(#ink-rough-2)". */
-.scribble {
-  position: relative;
-  white-space: nowrap;
-}
-
-.scribble svg {
-  position: absolute;
-  left: -0.05em;
-  right: -0.05em;
-  bottom: -0.32em;
-  width: 104%;
-  height: 0.55em;
-  overflow: visible;
-}
-
-.pullquote {
-  background: var(--paper-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: 0 12px 28px -22px rgba(35, 34, 31, 0.28);
-  color: var(--ink);
-  font-family: "Caveat", cursive;
-  font-size: clamp(1.35rem, 4vw, 1.75rem);
-  line-height: 1.25;
-  margin: 1.7rem 0;
-  padding: 1rem 1.2rem;
-  position: relative;
-  transform: none;
-}
-
-.pullquote:nth-of-type(even) {
-  transform: none;
-}
-
-.pullquote::before {
-  background: rgba(255, 255, 255, 0.72);
-  border-radius: 2px;
-  content: "";
-  height: 20px;
-  left: 50%;
-  position: absolute;
-  top: -10px;
-  transform: translateX(-50%) rotate(-2deg);
-  width: 82px;
-}
-
-.note {
-  color: var(--accent-2);
-  font-family: "Caveat", cursive;
-  font-size: 1.35rem;
-  line-height: 1.2;
-}
-
-blockquote {
-  border-left: 3px solid var(--accent);
-  color: var(--ink-soft);
-  font-style: italic;
-  margin: 1.8rem 0;
-  padding: 0.2rem 0 0.2rem 1.3rem;
-}
-
-.article ul {
-  list-style: disc;
-  margin: 0 0 var(--gap);
-  padding-left: 1.4rem;
-}
-
-.article ul li {
-  font-size: var(--list);
-  line-height: var(--list-leading);
-  margin: 0;
-  padding-left: 0.1rem;
-}
-
-.article ul li::marker {
-  color: var(--accent);
-  font-size: 0.85em;
-}
-
-.divider {
-  background: no-repeat center / contain
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='16' viewBox='0 0 180 16'%3E%3Cpath d='M3 8q11-6 22 0t22 0 22 0 22 0 22 0 22 0 22 0' fill='none' stroke='%236F6555' stroke-width='2' stroke-linecap='round' opacity='.62'/%3E%3C/svg%3E");
-  border: 0;
-  height: 16px;
-  margin: 2rem auto;
-  width: 180px;
-}
-
-figure,
-.figure,
-.chart,
-.stat {
-  margin: 0 0 var(--gap);
-}
-
-figcaption {
-  color: var(--ink);
-  font-family: "Caveat", cursive;
-  font-size: var(--caption);
-  line-height: 1;
-  margin-top: 0.45rem;
-  text-align: center;
-  transform: rotate(1deg);
-}
-
-figure,
-.figure {
-  margin-left: 50%;
-  max-width: calc(100vw - var(--page-gutter) - var(--page-gutter));
-  padding: 1.5rem 0;
-  transform: translateX(-50%);
-  width: var(--media-width);
-}
-
-figure > img,
-.figure img {
-  background: var(--paper-card);
-  border: 6px solid #ffffff;
-  border-radius: var(--image-radius);
-  box-shadow: var(--raised);
-  display: block;
-  height: auto;
-  transform: rotate(1deg);
-  width: 100%;
-}
-
-.figure--taped {
-  position: relative;
-}
-
-.figure--taped img {
-  transform: rotate(1deg);
-}
-
-.figure--taped::before {
-  background: rgba(255, 255, 255, 0.72);
-  border-radius: 2px;
-  content: "";
-  height: 30px;
-  left: 18%;
-  position: absolute;
-  top: 1.5rem;
-  transform: translateY(-50%) rotate(-4deg);
-  width: 88px;
-  z-index: 2;
-}
-
-.gallery {
-  display: grid;
-  gap: 0.9rem;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  margin: 2.2rem 0;
-}
-
-.gallery img {
-  aspect-ratio: 4 / 3;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-}
-
-.gallery img:nth-child(odd) {
-  transform: rotate(-0.8deg);
-}
-
-.gallery img:nth-child(even) {
-  transform: rotate(0.8deg);
-}
-
-.chart svg {
-  height: auto;
-  overflow: visible;
-  width: 100%;
-}
-
-.chart__title {
-  margin: 0 0 0.6rem;
-}
-
-.chart__val {
-  fill: var(--ink);
-  font-family: "Caveat", cursive;
-  font-size: 15px;
-}
-
-.chart__cat {
-  fill: var(--axis);
-  font-family: "Alegreya", serif;
-  font-size: 11px;
-}
-
-.chart__note {
-  fill: var(--accent-2);
-  font-family: "Caveat", cursive;
-  font-size: 14px;
-}
-
-.article table {
-  border-collapse: collapse;
-  font-size: 1.02rem;
-  margin: 2rem 0;
-  width: 100%;
-}
-
-.article th {
-  border-bottom: 2px solid var(--accent);
-  font-family: "Tenor Sans", Georgia, serif;
-  font-weight: 600;
-  padding: 0.55rem 0.6rem;
-  text-align: left;
-}
-
-.article td {
-  border-bottom: 1px solid var(--line);
-  color: var(--ink-soft);
-  padding: 0.55rem 0.6rem;
-}
-
-.article tr:last-child td {
-  border-bottom: 0;
-}
-
-.article tbody tr:hover td {
-  background: rgba(255, 227, 192, 0.24);
-}
-
-.article td.num {
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-}
-
-.stat {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 22ch;
-  text-align: center;
-}
-
-.stat__num {
-  color: var(--accent);
-  font-family: "Tenor Sans", Georgia, serif;
-  font-size: 3.4rem;
-  font-weight: 400;
-  line-height: 1;
-}
-
-.stat__label {
-  color: var(--ink-soft);
-  display: block;
-  font-family: "Caveat", cursive;
-  font-size: 1.4rem;
-  margin-top: 0.3rem;
-}
-
-.stamp {
-  display: none;
-}
-
-@media (min-width: 1100px) {
-  .note {
-    clear: right;
-    float: right;
-    margin: 0.2rem -190px 0.8rem 1rem;
-    width: 160px;
-  }
-
-  .note:nth-of-type(3n) {
-    transform: none;
-  }
-
-  .note:nth-of-type(3n + 1) {
-    transform: none;
-  }
-
-  .note:nth-of-type(3n + 2) {
-    transform: none;
-  }
-
-  .note::before {
-    content: "\21B3 ";
-  }
-
-  .figure--wide {
-    margin-left: 50%;
-    width: var(--media-width);
-  }
-}
-
-@media (max-width: 1099px) {
-  .note {
-    border-left: 3px dotted var(--accent-2);
-    display: block;
-    margin: 1rem 0;
-    padding-left: 0.9rem;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --body: 1.0625rem; /* Figma mobile body: 17px */
-    --leading: 1.411765; /* Figma mobile body: 24px */
-    --gap: var(--mobile-gap);
-    --image-radius: 16px;
-  }
-
-  .article {
-    max-width: none;
-    padding: 48px 0;
-  }
-
-  .dateline {
-    margin-bottom: 1.5rem;
-  }
-
-  .title {
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    max-width: none;
-    width: 100%;
-  }
-
-  figure,
-  .figure {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  figure > img,
-  .figure img {
-    border-width: 6px;
-    border-radius: var(--image-radius);
-  }
-
-}
-</style>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Health and Longevity Report</title>
   <style>
-    /* small tweak: keep lead readable */
+    :root{--ink:#17251f;--muted:#5c6963;--paper:#f7f8f3;--card:#fff;--line:#d9dfda;--green:#166b4d;--lime:#cce96b;--coral:#ef775f;--coral-soft:#fde7df;--blue:#477b84;--navy:#15322b;--shadow:0 16px 40px rgba(30,48,40,.08)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--paper)}body{margin:0;font-family:"IBM Plex Sans",sans-serif;color:var(--ink);background:linear-gradient(90deg,rgba(21,50,43,.035) 1px,transparent 1px),linear-gradient(rgba(21,50,43,.035) 1px,transparent 1px),var(--paper);background-size:28px 28px;line-height:1.55;overflow-x:hidden}a{color:inherit}.page{width:min(1180px,calc(100% - 40px));margin:0 auto;padding:32px 0 80px}
+    .topline{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}.date{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);letter-spacing:.02em}.coverage{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600}.coverage::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(204,233,107,.28)}
+    .hero{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.75fr);gap:44px;align-items:end;padding:54px 0 34px}h1{margin:0;font-size:clamp(38px,6vw,76px);line-height:.98;letter-spacing:-.05em;max-width:880px;font-weight:700}.hero-copy{margin:26px 0 0;max-width:700px;font-size:18px;color:#40504a}.hero-aside{background:var(--navy);color:#f6fbf7;padding:26px;border-radius:4px 24px 4px 4px;box-shadow:var(--shadow)}.hero-aside .label{font-family:"IBM Plex Mono",monospace;font-size:11px;color:#a7c4b8;text-transform:uppercase;letter-spacing:.08em}.hero-aside strong{display:block;font-size:24px;line-height:1.25;margin:10px 0 18px}.hero-aside p{margin:0;color:#c9dbd3;font-size:14px}.hero-aside .rule{height:1px;background:#38564b;margin:18px 0}
+    .scoreboard{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 34px}.metric{padding:25px 24px;min-width:0}.metric+.metric{border-left:1px solid var(--line)}.metric .k{font-family:"IBM Plex Mono",monospace;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em}.metric .v{display:block;margin-top:9px;font-size:34px;font-weight:700;line-height:1;letter-spacing:-.045em}.metric .sub{margin-top:8px;font-size:13px;color:var(--muted)}
+    .tabs{position:sticky;top:0;z-index:10;display:flex;gap:8px;flex-wrap:wrap;padding:12px 0;background:rgba(247,248,243,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-bottom:34px}.tabs a{text-decoration:none;font-size:13px;font-weight:600;padding:8px 13px;border-radius:999px;color:#4a5b54}.tabs a:hover,.tabs a:focus-visible{background:var(--ink);color:#fff;outline:none}section{scroll-margin-top:74px;margin-top:64px}
+    .section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.52fr);gap:32px;align-items:end;margin-bottom:22px}.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--green);font-weight:500;margin:0 0 10px}h2{font-size:clamp(28px,4vw,45px);line-height:1.06;letter-spacing:-.035em;margin:0}.section-head>p{margin:0;color:var(--muted);font-size:15px}
+    .callouts{display:grid;grid-template-columns:1fr 1fr;gap:18px}.callout{padding:26px;background:var(--card);border-top:4px solid var(--green);box-shadow:var(--shadow)}.callout.watch{border-color:var(--coral)}.callout h3{margin:0 0 15px;font-size:18px}.callout ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}.callout li{display:grid;grid-template-columns:18px 1fr;gap:10px;color:#42524b;font-size:15px}.callout li::before{content:"";width:8px;height:8px;background:var(--green);border-radius:50%;margin-top:7px}.callout.watch li::before{background:var(--coral)}
+    .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;align-items:start}.card{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);padding:26px;min-width:0}.span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.card-head{display:flex;justify-content:space-between;gap:20px;align-items:start;margin-bottom:20px}.card h3{font-size:20px;margin:0;letter-spacing:-.02em}.card .desc{color:var(--muted);font-size:13px;margin:5px 0 0}.legend{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end;color:var(--muted);font-size:12px}.key{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}.dot,.dash{width:9px;height:9px;background:var(--green);border-radius:2px}.dot.coral{background:var(--coral)}.dash{height:0;width:18px;border-top:2px dashed var(--coral);border-radius:0;background:none}
+    .chart{width:100%;height:auto;display:block;overflow:visible}.chart text{font-family:"IBM Plex Sans",sans-serif;fill:#64716c;font-size:11px}.chart .value{fill:var(--ink);font-weight:600}.chart .axis{stroke:#dbe1dc;stroke-width:1}.chart .gridline{stroke:#e9ede9;stroke-width:1}.chart .goal{stroke:var(--coral);stroke-width:2;stroke-dasharray:5 5}.chart .bar{fill:var(--green)}.chart .bar-low{fill:var(--coral)}.chart .line{fill:none;stroke:var(--green);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.chart .point{fill:#fff;stroke:var(--green);stroke-width:3}
+    .mini-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:20px}.mini{background:#fbfcf8;padding:16px}.mini b{font-size:22px;letter-spacing:-.03em}.mini span{display:block;color:var(--muted);font-size:11px;margin-top:3px}.activity-list{display:grid;gap:22px;margin-top:22px}.activity-top{display:flex;justify-content:space-between;gap:14px;font-size:14px;margin-bottom:7px}.activity-top strong{font-size:15px}.activity-top span{font-family:"IBM Plex Mono",monospace;color:var(--muted);font-size:12px}.track{height:12px;background:#edf0ed;position:relative;overflow:hidden;border-radius:99px}.track i{display:block;height:100%;border-radius:99px;background:var(--green)}.activity:nth-child(2) .track i{background:var(--blue)}.activity:nth-child(3) .track i{background:#d6a63b}.note{margin-top:20px;background:#f0f4ee;padding:16px 18px;color:#435149;font-size:13px;border-radius:3px}
+    .sleep-findings{display:grid;gap:14px}.finding{padding:16px 0;border-bottom:1px solid var(--line)}.finding:last-child{border:0;padding-bottom:0}.finding:first-child{padding-top:0}.finding .meta{font-family:"IBM Plex Mono",monospace;color:var(--muted);font-size:11px}.finding strong{display:block;margin:4px 0;font-size:17px}.finding p{margin:0;color:#53615b;font-size:14px}.nutrition{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}.nutri{background:#f4f6f2;padding:18px;min-width:0}.nutri .v{font-size:28px;font-weight:700;letter-spacing:-.04em}.nutri .u{font-size:13px;color:var(--muted)}.nutri .name{margin-top:14px;font-weight:600}.nutri .range{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted);margin-top:4px}
+    .priority-list{counter-reset:p;display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}.priority{counter-increment:p;background:#fff;padding:22px;display:grid;grid-template-columns:42px 1fr;gap:16px}.priority::before{content:"0" counter(p);font-family:"IBM Plex Mono",monospace;color:var(--green);font-size:13px;padding-top:3px}.priority h3{margin:0 0 5px;font-size:17px}.priority p{margin:0;color:var(--muted);font-size:14px}.trend-panel{background:var(--navy);color:#eff8f3;padding:32px;border-radius:4px 36px 4px 4px}.trend-panel h3{font-size:28px;margin:0 0 10px;letter-spacing:-.03em}.trend-panel>p{color:#bad1c7;max-width:720px;margin:0}.horizons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}.horizon{border:1px solid #3a594d;padding:18px}.horizon .time{font-family:"IBM Plex Mono",monospace;color:var(--lime);font-size:11px}.horizon strong{display:block;margin:8px 0 4px}.horizon span{color:#a9c2b7;font-size:13px}
+    details{background:var(--card);border:1px solid var(--line);margin-top:12px}summary{list-style:none;cursor:pointer;padding:20px 22px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:20px}summary::-webkit-details-marker{display:none}summary::after{content:"+";font-family:"IBM Plex Mono",monospace;font-size:20px;color:var(--green)}details[open] summary::after{content:"−"}details .detail-body{border-top:1px solid var(--line);padding:20px 22px;color:#4c5d55;font-size:14px}.detail-body ul{margin:0;padding-left:20px}.detail-body li+li{margin-top:8px}.safety{display:grid;grid-template-columns:48px 1fr;gap:18px;background:var(--coral-soft);padding:24px;border-top:3px solid var(--coral)}.safety svg{width:38px;height:38px}.safety h3{margin:0 0 6px;font-size:17px}.safety p{margin:0;color:#5d4d48;font-size:14px}footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:24px;color:var(--muted);font-size:12px}footer p{margin:0;max-width:780px}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;gap:28px;padding-top:40px}.hero-aside{max-width:620px}.scoreboard{grid-template-columns:repeat(2,1fr)}.metric:nth-child(3){border-left:0;border-top:1px solid var(--line)}.metric:nth-child(4){border-top:1px solid var(--line)}.section-head{grid-template-columns:1fr;gap:12px}.span-8,.span-7,.span-5,.span-4{grid-column:span 12}.horizons{grid-template-columns:1fr}}
+    @media(max-width:620px){.page{width:min(100% - 24px,1180px);padding-top:20px}.topline{align-items:flex-start;flex-direction:column;gap:8px}.hero{padding:34px 0 24px}.hero-copy{font-size:16px}.hero-aside{padding:22px}.scoreboard{margin-bottom:18px}.metric{padding:18px 15px}.metric .v{font-size:28px}.metric .sub{font-size:12px}.tabs{margin-inline:-12px;padding-inline:12px}.tabs a{padding:7px 10px;font-size:12px}section{margin-top:48px}.callouts{grid-template-columns:1fr}.card{padding:20px 16px}.card-head{flex-direction:column;gap:10px}.legend{justify-content:flex-start}.mini-row{grid-template-columns:1fr}.nutrition{grid-template-columns:1fr}.priority{padding:18px;grid-template-columns:34px 1fr}.trend-panel{padding:24px 20px}.safety{grid-template-columns:1fr}.safety svg{width:32px;height:32px}footer{grid-template-columns:1fr}.chart text{font-size:10px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{body{background:#fff}.page{width:100%;padding:0}.tabs{display:none}.card,.scoreboard,.callout{box-shadow:none}section{break-inside:avoid}.hero{padding-top:12px}}
   </style>
 </head>
 <body>
-  <main class="sheet">
-    <article class="article">
-      <p class="dateline">August 27, 2026</p>
-      <h1 class="title">First HealthKit week</h1>
+<main class="page">
+  <div class="topline"><div class="date">WEEKLY SNAPSHOT · AUG 19–25, 2026 · AMERICA/NEW_YORK</div><div class="coverage">6 complete metric days · 7 primary sleep records</div></div>
+  <header class="hero">
+    <div><h1>A strong training week. Sleep consistency is the lever.</h1><p class="hero-copy">Exercise volume and variety were clear strengths. Average sleep duration reached 7.55 hours, but one very late night and one fragmented night widened the week’s range.</p></div>
+    <aside class="hero-aside" aria-label="Current interpretation"><div class="label">Current read</div><strong>On track, with one focused opportunity.</strong><p>Keep the movement mix. Watch whether late starts or low sleep efficiency repeat before treating them as a trend.</p><div class="rule"></div><p>Long-term conclusions remain paused: the available HealthKit history spans only about one week.</p></aside>
+  </header>
+  <div class="scoreboard" aria-label="Weekly scorecard">
+    <div class="metric"><span class="k">Daily steps</span><span class="v" id="stepsAvg">—</span><div class="sub">6 complete days</div></div>
+    <div class="metric"><span class="k">Sleep</span><span class="v" id="sleepAvg">—</span><div class="sub">7-night average</div></div>
+    <div class="metric"><span class="k">Strength</span><span class="v" id="strengthSessions">—</span><div class="sub">sessions · <span id="strengthMinutes">—</span> min</div></div>
+    <div class="metric"><span class="k">Recovery</span><span class="v" id="hrvAvg">—</span><div class="sub">ms HRV average</div></div>
+  </div>
+  <nav class="tabs" aria-label="Report sections"><a href="#overview">Overview</a><a href="#movement">Movement</a><a href="#sleep">Sleep</a><a href="#recovery">Recovery</a><a href="#nutrition">Nutrition</a><a href="#long-term">Long term</a><a href="#notes">Notes</a></nav>
 
-      <p class="lead">I finally have real numbers for your longevity baseline, and they mostly confirm what you already had dialed in. Your first HealthKit week, August 19–25, shows the lifting, sleep, and recovery all sitting right where you'd want them.</p>
+  <section id="overview">
+    <div class="section-head"><div><p class="eyebrow">01 / WEEK AT A GLANCE</p><h2>What to keep—and what to watch</h2></div><p>This is an observational review of a short window, not a score or a diagnosis.</p></div>
+    <div class="callouts">
+      <article class="callout"><h3>Working well</h3><ul><li><span><strong>Strength consistency:</strong> six strength sessions were recorded during the report window.</span></li><li><span><strong>Movement variety:</strong> strength, walking, and table tennis created a balanced week.</span></li><li><span><strong>Sleep quantity:</strong> the seven-night average reached 7.55 hours.</span></li><li><span><strong>Stable recovery:</strong> resting heart rate stayed in a narrow 60–66 bpm range.</span></li></ul></article>
+      <article class="callout watch"><h3>Worth watching</h3><ul><li><span><strong>Sleep variability:</strong> duration ranged from 5.63 to 8.36 hours.</span></li><li><span><strong>Timing variability:</strong> the median sleep start was about 1:39 a.m., with one start at 3:26 a.m.</span></li><li><span><strong>Fragmentation:</strong> Aug 25 had 79.1% efficiency and nearly 50 minutes classified awake.</span></li><li><span><strong>Fiber logging:</strong> entries varied widely; confirm whether the low day was intake or incomplete logging.</span></li></ul></article>
+    </div>
+  </section>
 
-      <figure class="figure figure--taped">
-        <img src="sandbox://workspace/goals/longevity-healthy-for-as-long-as-possible/briefs/media/media-generation-longevity-hero-0-570b5a0b-d7d5-42bb-bb59-b3759a330193.webp" alt="Quiet evening notebook with sleep and workout charts, warm lamp light, hand-drawn anime style">
-        <figcaption>First week of real data, on paper</figcaption>
-      </figure>
+  <section id="movement">
+    <div class="section-head"><div><p class="eyebrow">02 / MOVEMENT</p><h2>Exercise was the week’s clearest strength</h2></div><p>Complete-day steps averaged <strong id="stepsAvgInline">—</strong>. The mix matters more than chasing a new target from one week.</p></div>
+    <div class="grid">
+      <article class="card span-8"><div class="card-head"><div><h3>Daily steps</h3><p class="desc">Complete days only; axis begins at zero.</p></div><div class="legend"><span class="key"><i class="dot"></i> Steps</span></div></div><svg id="stepsChart" class="chart" viewBox="0 0 720 310" role="img" aria-label="Bar chart of daily steps from August 20 to August 25"></svg></article>
+      <article class="card span-4"><div class="card-head"><div><h3>Recorded activity</h3><p class="desc">Total minutes by activity type.</p></div></div><div id="activityList" class="activity-list"></div><div class="note">Apple Health can split walks and table tennis into multiple sessions, so minutes are more useful than session count for those activities.</div></article>
+    </div>
+  </section>
 
-      <p>You logged six strength sessions for 239 minutes total, with steps averaging about 6,300 a day on top of that. Sleep averaged 7.55 hours, right on your usual night-owl schedule. It was solid most nights, especially August 21–24, with two rougher ones in the mix: the 20th was a late 3:26 am start at 5.6 hours, and the 25th was fragmented with about 35 awakenings. Recovery trended the right way too, with HRV moving from about 31 ms up to 46 ms over the week, and resting heart rate steady at 60–66.</p>
+  <section id="sleep">
+    <div class="section-head"><div><p class="eyebrow">03 / SLEEP</p><h2>Enough sleep overall, unevenly distributed</h2></div><p>Five nights clustered near eight hours. A 5.63-hour night on Aug 20 and lower efficiency on Aug 25 created most of the variability.</p></div>
+    <div class="grid">
+      <article class="card span-8"><div class="card-head"><div><h3>Sleep duration by night</h3><p class="desc">Night labeled by start date; axis begins at zero.</p></div><div class="legend"><span class="key"><i class="dot"></i> Sleep</span><span class="key"><i class="dot coral"></i> Under 6.5 h</span><span class="key"><i class="dash"></i> 7.5 h reference</span></div></div><svg id="sleepChart" class="chart" viewBox="0 0 720 320" role="img" aria-label="Bar chart of sleep hours from August 19 to August 25 with a 7.5 hour reference"></svg></article>
+      <aside class="card span-4 sleep-findings"><div class="finding"><div class="meta">STRONGEST STRETCH</div><strong>Aug 21–24</strong><p>Four consecutive nights between 7.85 and 8.08 hours with 91.9–93.4% efficiency.</p></div><div class="finding"><div class="meta">SHORT-NIGHT OUTLIER</div><strong>Aug 20</strong><p>A 3:26 a.m. start coincided with the week’s shortest sleep: 5.63 hours.</p></div><div class="finding"><div class="meta">CONTINUITY FLAG</div><strong>Aug 25</strong><p>Sleep duration reached 6.93 hours, but efficiency fell to 79.1%.</p></div></aside>
+    </div>
+  </section>
 
-      <p>Nutrition logging is still patchy, so I wouldn't read too much into the day-to-day swings, but protein came in around 171 g per day on average, which covers your lifting well. Fiber was all over the map, likely just incomplete logging on the low days.</p>
+  <section id="recovery">
+    <div class="section-head"><div><p class="eyebrow">04 / RECOVERY</p><h2>Stable heart rate, late-week HRV lift</h2></div><p>HRV is individual and noisy. This week sets an initial reference, not a durable trend.</p></div>
+    <div class="grid">
+      <article class="card span-7"><div class="card-head"><div><h3>Heart rate variability</h3><p class="desc">Daily average in milliseconds; line chart uses a labeled 30–50 ms domain.</p></div><div class="legend"><span class="key"><i class="dot"></i> HRV</span></div></div><svg id="hrvChart" class="chart" viewBox="0 0 720 315" role="img" aria-label="Line chart of HRV from August 20 to August 25"></svg></article>
+      <article class="card span-5"><div class="card-head"><div><h3>Recovery reference</h3><p class="desc">Six complete daily rollups.</p></div></div><div class="mini-row"><div class="mini"><b id="rhrAvg">—</b><span>avg resting bpm</span></div><div class="mini"><b id="rhrRange">—</b><span>resting HR range</span></div><div class="mini"><b id="vo2">—</b><span>VO₂ max · 2 samples</span></div></div><div class="note">The late-week HRV rise is encouraging, but a sustained resting-heart-rate shift or multi-week HRV decline would carry more weight than any single day.</div></article>
+    </div>
+  </section>
 
-      <p>The big change is that this is no longer self-report. Your Health and Longevity Report is live now, with the scorecards and charts for movement, sleep, recovery, and nutrition all pulling from HealthKit. It updates with the Sunday check-in, next one August 30 at 6:08pm ET, and I'll keep the watch quiet between now and then.</p>
+  <section id="nutrition">
+    <div class="section-head"><div><p class="eyebrow">05 / NUTRITION</p><h2>Protein was consistent; fiber needs context</h2></div><p>Nutrition reflects what was logged in Apple Health, not necessarily everything consumed.</p></div>
+    <article class="card"><div class="nutrition" id="nutritionCards"></div><div class="note">Energy adequacy cannot be judged without a goal, body-weight trend, and confidence that every meal was logged. Fiber variability is a prompt to verify, not a firm conclusion.</div></article>
+  </section>
 
-      <p>Nothing here is asking for a course correction. You've got a strong floor already, and now we have real data to catch drift early if it ever shows up.</p>
+  <section><div class="section-head"><div><p class="eyebrow">06 / NEXT WEEK</p><h2>Three light-touch priorities</h2></div><p>Observe first. Escalate only if a pattern repeats or symptoms appear.</p></div><div class="priority-list"><article class="priority"><div><h3>Protect regularity</h3><p>Notice another sleep start after roughly 2 a.m. or another night below 6.5 hours; review what preceded it.</p></div></article><article class="priority"><div><h3>Match training to recovery</h3><p>Keep technique controlled and let sleep and fatigue guide intensity after dense lifting blocks.</p></div></article><article class="priority"><div><h3>Verify fiber logging</h3><p>Separate an incomplete food log from a true low-fiber day before calling it a trend.</p></div></article></div></section>
 
-      <p class="byline">&mdash;<span>Chuckles</span></p>
-    </article>
-  </main>
+  <section id="long-term"><div class="trend-panel"><p class="eyebrow" style="color:var(--lime)">07 / LONG-TERM VIEW</p><h3>Baseline forming—trend labels are not active yet.</h3><p>Available HealthKit coverage begins Aug 18–19, 2026, depending on the series. Medium- and long-term comparisons would currently recycle the same week and create false confidence.</p><div class="horizons"><div class="horizon"><span class="time">4 WEEKS</span><strong>Consistency</strong><span>Sleep timing, strength frequency, steps, resting HR, and HRV direction.</span></div><div class="horizon"><span class="time">8–12 WEEKS</span><strong>Drift</strong><span>Recovery balance, movement changes, VO₂ max, and nutrition consistency.</span></div><div class="horizon"><span class="time">12 MONTHS</span><strong>Durability</strong><span>Seasonal change and whether short-term signals predicted lasting movement.</span></div></div></div></section>
 
-<script data-hatch-goal-briefing-open-tracker="true">
-(() => {
-  const key = "goal_briefing.open:goal_1e7f73b1fb9c:goal_briefing_863dafc983c5";
-  window.__hatchGoalBriefingOpenEvents = window.__hatchGoalBriefingOpenEvents || {};
-  if (window.__hatchGoalBriefingOpenEvents[key]) return;
-  window.__hatchGoalBriefingOpenEvents[key] = true;
-  const action = "goal_briefing.open";
-  const payload = { goalId: "goal_1e7f73b1fb9c", briefingId: "goal_briefing_863dafc983c5" };
-  if (window.hatch && typeof window.hatch.call === "function") {
-    window.hatch.call(action, payload);
-  } else if (window.parent && typeof window.parent.postMessage === "function") {
-    window.parent.postMessage({ type: "hatch:call", action, payload }, "*");
-  }
-})();
+  <section id="notes">
+    <div class="section-head"><div><p class="eyebrow">08 / METHODS & NOTES</p><h2>How to interpret this snapshot</h2></div><p>Coverage and source differences affect which comparisons are meaningful.</p></div>
+    <details open><summary>Coverage and duplicate sleep sources</summary><div class="detail-body"><ul><li>Daily averages use Aug 20–25, the six complete metric days. Aug 19 and Aug 26 were partial and excluded.</li><li>Seven primary sleep sessions use the overlapping record that included time-in-bed data. Exact awakening counts remain uncertain because the two synced sleep sources disagree.</li><li>VO₂ max has only two nearly identical samples: 43.47 and 43.62. That is an initial reference, not a direction.</li></ul></div></details>
+    <details><summary>Medical boundary</summary><div class="detail-body">Wearable data supports pattern recognition but cannot rule conditions in or out. Persistent low-efficiency sleep, loud snoring, gasping, morning headaches, excessive daytime sleepiness, sustained heart-rate changes, or concerning symptoms belong with a qualified clinician.</div></details>
+    <div class="safety" style="margin-top:18px"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 41 11v11c0 11-7.2 18.5-17 22C14.2 40.5 7 33 7 22V11l17-7Z" fill="none" stroke="#b54e3b" stroke-width="2.5"/><path d="M15 25h5l3-7 4 13 3-6h4" fill="none" stroke="#b54e3b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h3>Training safety note</h3><p>Use controlled technique, breathe through effort, and avoid prolonged breath-holding. If you have an eye condition or receive activity-specific guidance from a clinician, that guidance overrides this report.</p></div></div>
+  </section>
+  <footer><p>Source: HealthKit metrics, sleep sessions, and workout sessions queried for Aug 19–26, 2026. Endpoint days were partial and excluded where noted. This report is observational and is not a diagnosis or substitute for medical care.</p><p>Snapshot prepared Aug 26, 2026</p></footer>
+</main>
+<script>
+const DATA={daily:[{label:'Aug 20',steps:6153,exercise:56,hrv:38.7325,rhr:60},{label:'Aug 21',steps:2763,exercise:61,hrv:37.6082,rhr:63},{label:'Aug 22',steps:6365,exercise:97,hrv:31.8828,rhr:61},{label:'Aug 23',steps:8937,exercise:106,hrv:31.1038,rhr:66},{label:'Aug 24',steps:5573,exercise:74,hrv:43.9305,rhr:66},{label:'Aug 25',steps:8518,exercise:101,hrv:46.0619,rhr:64}],sleep:[{label:'Aug 19',hours:8.3583,eff:89.6,quality:84},{label:'Aug 20',hours:5.6333,eff:90.4,quality:48},{label:'Aug 21',hours:8.075,eff:93.4,quality:91},{label:'Aug 22',hours:7.85,eff:92.2,quality:89},{label:'Aug 23',hours:8.0833,eff:91.9,quality:88},{label:'Aug 24',hours:7.9,eff:93.1,quality:90},{label:'Aug 25',hours:6.9333,eff:79.1,quality:59}],activities:[{name:'Strength training',minutes:239.0375,sessions:6},{name:'Walking',minutes:236.8196,sessions:15},{name:'Table tennis',minutes:158,sessions:8}],nutrition:[{name:'Energy',unit:'kcal/day',values:[3061.0710,2027.3010,2171.9187,2093.0288,2480.0209,2455.6499]},{name:'Protein',unit:'g/day',values:[182.8048,185.7651,163.8404,150.3136,169.6739,176.6577]},{name:'Fiber',unit:'g/day',values:[33.3030,25.6421,13.3793,6.5882,27.0026,29.4658]}],vo2:[43.62,43.47]};
+const mean=a=>a.reduce((s,v)=>s+v,0)/a.length,fmt=n=>Math.round(n).toLocaleString('en-US'),el=(id,t)=>document.getElementById(id).textContent=t;
+el('stepsAvg',fmt(mean(DATA.daily.map(d=>d.steps))));el('stepsAvgInline',fmt(mean(DATA.daily.map(d=>d.steps)))+' per day');el('sleepAvg',mean(DATA.sleep.map(d=>d.hours)).toFixed(2)+' h');el('strengthSessions',DATA.activities[0].sessions);el('strengthMinutes',fmt(DATA.activities[0].minutes));el('hrvAvg',fmt(mean(DATA.daily.map(d=>d.hrv))));const rhrs=DATA.daily.map(d=>d.rhr);el('rhrAvg',fmt(mean(rhrs)));el('rhrRange',Math.min(...rhrs)+'–'+Math.max(...rhrs));el('vo2',mean(DATA.vo2).toFixed(1));
+const NS='http://www.w3.org/2000/svg';function node(tag,attrs={},text=''){const n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;return n}function clear(svg){while(svg.firstChild)svg.removeChild(svg.firstChild)}
+function barChart(id,data,key,{max,ticks,goal=null,low=null,valueFormat=v=>fmt(v)}){const svg=document.getElementById(id);clear(svg);const W=720,H=310,L=54,R=16,T=24,B=48,PW=W-L-R,PH=H-T-B;ticks.forEach(t=>{const y=T+PH-(t/max)*PH;svg.append(node('line',{x1:L,y1:y,x2:W-R,y2:y,class:'gridline'}));svg.append(node('text',{x:L-10,y:y+4,'text-anchor':'end'},valueFormat(t)))});svg.append(node('line',{x1:L,y1:T,x2:L,y2:T+PH,class:'axis'}));svg.append(node('line',{x1:L,y1:T+PH,x2:W-R,y2:T+PH,class:'axis'}));if(goal!==null){const y=T+PH-(goal/max)*PH;svg.append(node('line',{x1:L,y1:y,x2:W-R,y2:y,class:'goal'}));svg.append(node('text',{x:W-R,y:y-7,'text-anchor':'end',class:'value'},goal+' h reference'))}const slot=PW/data.length,bw=Math.min(54,slot*.56);data.forEach((d,i)=>{const v=d[key],h=v/max*PH,x=L+i*slot+(slot-bw)/2,y=T+PH-h,rect=node('rect',{x,y,width:bw,height:h,rx:3,class:low&&low(v)?'bar-low':'bar',tabindex:0,'aria-label':`${d.label}: ${valueFormat(v)}`});rect.append(node('title',{},`${d.label}: ${valueFormat(v)}`));svg.append(rect);svg.append(node('text',{x:x+bw/2,y:y-8,'text-anchor':'middle',class:'value'},valueFormat(v)));svg.append(node('text',{x:x+bw/2,y:H-18,'text-anchor':'middle'},d.label.replace('Aug ','')))});}
+barChart('stepsChart',DATA.daily,'steps',{max:10000,ticks:[0,2500,5000,7500,10000],valueFormat:v=>v===0?'0':v>=1000?(v/1000).toFixed(v%1000?1:0)+'k':fmt(v)});barChart('sleepChart',DATA.sleep,'hours',{max:10,ticks:[0,2,4,6,8,10],goal:7.5,low:v=>v<6.5,valueFormat:v=>Number.isInteger(v)?v.toString():v.toFixed(1)+'h'});
+function lineChart(id,data,key,{min,max,ticks,valueFormat}){const svg=document.getElementById(id);clear(svg);const W=720,H=315,L=54,R=20,T=26,B=50,PW=W-L-R,PH=H-T-B;ticks.forEach(t=>{const y=T+PH-((t-min)/(max-min))*PH;svg.append(node('line',{x1:L,y1:y,x2:W-R,y2:y,class:'gridline'}));svg.append(node('text',{x:L-10,y:y+4,'text-anchor':'end'},valueFormat(t)))});const pts=data.map((d,i)=>({x:L+i*(PW/(data.length-1)),y:T+PH-((d[key]-min)/(max-min))*PH,d}));svg.append(node('line',{x1:L,y1:T,x2:L,y2:T+PH,class:'axis'}));svg.append(node('line',{x1:L,y1:T+PH,x2:W-R,y2:T+PH,class:'axis'}));svg.append(node('polyline',{points:pts.map(p=>`${p.x},${p.y}`).join(' '),class:'line'}));pts.forEach(p=>{const c=node('circle',{cx:p.x,cy:p.y,r:6,class:'point',tabindex:0,'aria-label':`${p.d.label}: ${valueFormat(p.d[key])}`});c.append(node('title',{},`${p.d.label}: ${valueFormat(p.d[key])}`));svg.append(c);svg.append(node('text',{x:p.x,y:p.y-13,'text-anchor':'middle',class:'value'},valueFormat(p.d[key])));svg.append(node('text',{x:p.x,y:H-20,'text-anchor':'middle'},p.d.label.replace('Aug ','')))});}
+lineChart('hrvChart',DATA.daily,'hrv',{min:30,max:50,ticks:[30,35,40,45,50],valueFormat:v=>Math.round(v)+' ms'});
+const maxMinutes=Math.max(...DATA.activities.map(a=>a.minutes)),activities=document.getElementById('activityList');DATA.activities.forEach(a=>{const row=document.createElement('div');row.className='activity';row.innerHTML=`<div class="activity-top"><strong>${a.name}</strong><span>${fmt(a.minutes)} min · ${a.sessions} sessions</span></div><div class="track" role="img" aria-label="${a.name}: ${fmt(a.minutes)} minutes"><i style="width:${(a.minutes/maxMinutes*100).toFixed(1)}%"></i></div>`;activities.appendChild(row)});
+const nc=document.getElementById('nutritionCards');DATA.nutrition.forEach(n=>{const avg=mean(n.values),lo=Math.min(...n.values),hi=Math.max(...n.values),card=document.createElement('div');card.className='nutri';const decimals=n.name==='Energy'?0:1;card.innerHTML=`<div><span class="v">${avg.toFixed(decimals)}</span> <span class="u">${n.unit}</span></div><div class="name">${n.name}</div><div class="range">RANGE ${lo.toFixed(decimals)}–${hi.toFixed(decimals)}</div>`;nc.appendChild(card)});
 </script>
-</body>
-</html>
+</body></html>
